@@ -1,0 +1,68 @@
+.primary-text {
+    @apply text-blue-600
+}
+.primary-text-hover {
+    @apply text-blue-700
+}
+
+.primary-text-dark {
+    @apply text-blue-700
+}
+
+.primary-text-dark-hover {
+    @apply text-blue-700
+}
+
+.primary-bg {
+    @apply bg-gray-50
+}
+
+.primary-bg-hover {
+    @apply bg-gray-100
+}
+
+/*
+account for mobile
+*/
+.theme-flex {
+ @apply flex gap-4 items-center justify-center
+}
+
+.theme-flex-col {
+ @apply flex flex-col gap-4 items-start justify-center
+}
+
+.theme-flex-wrap {
+    @apply flex gap-x-4 gap-y-4 items-start justify-start flex-wrap;
+}
+
+/*
+account for mobile
+*/
+.theme-grid {
+
+}
+
+.theme-space-large {
+    @apply h-12
+}
+
+.primary-header {
+    @apply text-3xl font-bold
+}
+
+.primary-text {
+    @apply text-blue-500
+}
+
+.secondary-text {
+    @apply text-gray-500
+}
+
+.secondary-header {
+    @apply text-2xl font-bold
+}
+
+.theme-link {
+    @apply text-blue-500
+}
