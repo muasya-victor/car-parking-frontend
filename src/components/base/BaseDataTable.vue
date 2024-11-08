@@ -127,7 +127,7 @@ export default {
           .dispatch("fetchList", { url: `${url}\?page=${this.currentPage}&page_size=${this.pageSize}` })
           .then((resp) => {
             console.log('Data received:', resp.data);
-            this.dataSource = resp.data;
+            this.dataSource.results = resp.data;
             this.totalRecords = resp.data.count;
             this.loading = false;
           })

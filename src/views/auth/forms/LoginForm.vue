@@ -34,19 +34,13 @@ const submitForm = async (formEl: FormInstance | undefined) => {
     if (valid) {
       store
           .dispatch("postData", {
-            url: "token",
+            url: "users/token",
             data: form
           })
           .then((resp) => {
             localStorage.setItem("authData", JSON.stringify(resp.data));
             // console.log(resp.data)
             loginLoading.value = false;
-
-            /**
-             * Redirect based on user type
-             *
-             */
-            router.push({name: 'transaction'});
 
           })
           .catch((err)=>{
