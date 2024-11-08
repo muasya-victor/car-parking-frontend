@@ -2,7 +2,7 @@
 
 import {ref} from "vue"
 import TheSideNav from "@/components/TheSideNav.vue";
-import {Expand, Fold, Umbrella, UserFilled} from "@element-plus/icons-vue";
+import {Expand, Fold, HomeFilled, Umbrella, UserFilled} from "@element-plus/icons-vue";
 import {useStore} from "vuex";
 import {deleteLocalStorageInformation} from "@/utility/functions.js";
 import {useRouter, useRoute} from "vue-router";
@@ -10,6 +10,7 @@ import config from "@/utility/configs.json"
 const store = useStore()
 const router = useRouter()
 import {watch, computed} from "vue"
+import SecondaryLogin from "@/views/auth/forms/SecondaryLogin.vue";
 
 const breadcrumbStyle = computed(() => {
   return {
@@ -17,6 +18,9 @@ const breadcrumbStyle = computed(() => {
     // Add any other breadcrumb styles here if needed
   };
 });
+
+const userAuthData = JSON.parse(localStorage.getItem("authData"));
+
 
 const routerViewStyle = computed(() => {
   return {
@@ -27,7 +31,7 @@ const routerViewStyle = computed(() => {
 
 const logout = ()=>{
   deleteLocalStorageInformation()
-  router.replace({name:'login'})
+  window.location.reload()
 }
 const authData = JSON.parse(localStorage.getItem("authData"));
 
@@ -46,7 +50,7 @@ watch(route, updateBreadcrumbs, { immediate: true });
 </script>
 
 <template>
-  <div class="h-screen min-w-screen max-w-screen-md" style="max-width: 100vw">
+  <div v-if="userAuthData" class="h-screen min-w-screen max-w-screen-md" style="max-width: 100vw">
 
     <div class=" flex flex-col h-full min-w-full items-center">
   <!--    h-[70px]-->
@@ -70,7 +74,17 @@ watch(route, updateBreadcrumbs, { immediate: true });
 
 
 
+
+
           <div class=" theme-flex justify-end md:justify-between h-fit p-0">
+            <router-link :to="{name: 'landing'}">
+              <el-button >
+              <span class="flex gap-2 items-center">
+                <home-filled class="h-4 w-4"/>
+              </span>
+              </el-button>
+            </router-link>
+
             <el-breadcrumb :style="breadcrumbStyle" separator="/" class="hidden md:block">
               <el-breadcrumb-item v-for="(breadcrumb, index) in breadcrumbs" :key="index">
                 <span v-if="breadcrumb?.label === 'Dashboard' || breadcrumb?.label === 'dashboard'">Dashboard </span>
@@ -92,7 +106,7 @@ watch(route, updateBreadcrumbs, { immediate: true });
                 <!--            </div>-->
                 <div class=" font-bold primary-bg rounded-full h-[3rem] w-[3rem] p-2 flex items-center justify-center cursor-pointer text-[#fc7c04]">
                   <div class="flex p-0 items-center w-full h-fit mt-2  text-center  text-white justify-center ">
-                    {{authData?.user?.first_name[0]}} {{authData?.user?.last_name[0]}}
+                    {{authData?.user?.user_first_name[0]}} {{authData?.user?.user_last_name[0]}}
                   </div>
 
                 </div>
@@ -162,6 +176,9 @@ watch(route, updateBreadcrumbs, { immediate: true });
       </div>
     <TheSideNav v-if="store.state.ShowMobileMenu"/>
 
+  </div>
+  <div class="w-screen h-screen flex flex-col items-center justify-center" v-else>
+    <SecondaryLogin class="w-full md:w-1/2 h-fit p-4"/>
   </div>
 </template>
 
