@@ -15,10 +15,10 @@ const loginLoading = ref(false);
 
 const ruleFormRef = ref<FormInstance>();
 const rules = reactive<FormRules>({
-  username:{
+  email:{
     required: true,
     trigger: "blur",
-    message: "Please enter username",
+    message: "Please enter email",
   },
   password: {
     required: true,
@@ -34,13 +34,14 @@ const submitForm = async (formEl: FormInstance | undefined) => {
     if (valid) {
       store
           .dispatch("postData", {
-            url: "users/token",
+            url: "token",
             data: form
           })
           .then((resp) => {
             localStorage.setItem("authData", JSON.stringify(resp.data));
             // console.log(resp.data)
             loginLoading.value = false;
+            window.location.reload()
 
             /**
              * Redirect based on user type
@@ -83,19 +84,20 @@ const submitForm = async (formEl: FormInstance | undefined) => {
 
     <h2 class="font-bold text-gray-400">Sign In</h2>
 
-    <el-form-item label="Username" prop="username"
+    <el-form-item label="Email" prop="email"
                   :rules="[
             {
               required: true,
-              message: 'Please input username',
+              message: 'Please input email',
               trigger: 'blur',
+              type:'email'
             },
          ]"
     >
       <el-input
-          v-model="form.username"
+          v-model="form.email"
           :prefix-icon="User"
-          placeholder="username"
+          placeholder="email"
           size="large"
       />
     </el-form-item>
