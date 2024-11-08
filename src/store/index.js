@@ -132,19 +132,19 @@ export default createStore({
       },
       async downloadFirmData({ state, commit }, payload) {
           try {
-              const response = await api.get(`${baseUrl}${payload.url}/${payload.id}`, {
-                  responseType: 'blob',
+              const response = await api.get(`${baseUrl}${payload.url}`, {
+                  responseType: 'blob', // Ensure the response is a Blob
               });
 
-              // Create a new Blob object using the response data
-              const blob = new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+              // Create a new Blob object with the correct MIME type for PDF
+              const blob = new Blob([response.data], { type: 'application/pdf' });
 
               // Create a link element
               const link = document.createElement('a');
 
-              // Set the download attribute with a filename
+              // Set the download attribute with a filename for the PDF
               link.href = URL.createObjectURL(blob);
-              link.download = 'firm_data.xlsx';
+              link.download = 'user_report.pdf';
 
               // Append the link to the body
               document.body.appendChild(link);
@@ -152,10 +152,11 @@ export default createStore({
               // Programmatically click the link to trigger the download
               link.click();
 
-              // Remove the link from the document
+              // Remove the link from the document and release the Blob URL
               document.body.removeChild(link);
+              URL.revokeObjectURL(link.href);
           } catch (error) {
-              console.error('Error downloading the file:', error);
+              console.error('Error downloading the PDF file:', error);
           }
       },
       // import axios from 'axios';

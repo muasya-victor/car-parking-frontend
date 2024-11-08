@@ -36,7 +36,7 @@ api.interceptors.response.use(undefined, function (err) {
             })
             deleteLocalStorageInformation()
 
-            router.push({name : "login"});
+            router.push({name : "landing"});
 
         } else if (err.response.status === 403) {
             ElNotification({

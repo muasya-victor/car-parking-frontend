@@ -28,7 +28,7 @@ const formatDateColumn = (dateString) => {
 const downloadReport = () => {
   try {
     store.dispatch('downloadFirmData', {
-      url: 'report', // Corrected URL format
+      url: 'report',
     })
         .then((response) => {
 
