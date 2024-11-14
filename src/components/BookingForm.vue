@@ -14,7 +14,6 @@
           {{slot.parking_slot_floor_number}} :
           {{slot.parking_slot_location}}
         </el-option>
-        <!-- Add more options as needed -->
       </el-select>
     </div>
 
@@ -86,8 +85,13 @@ const setToLocalStorage = () => {
                 booking_end_time: form.value?.entryDate,
               }
             }
-        ).then(()=>{
+        ).then((resp)=>{
           showLogin.value = false
+          // localStorage.setItem("parkingSlotData", JSON.stringify(form.value));
+          form.value.booking_total_cost = resp?.data?.booking_total_cost;
+          localStorage.setItem("parkingSlotData", JSON.stringify(form.value));
+
+          router.push({name: 'make-payment'});
         })
       }
     } else {

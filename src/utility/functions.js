@@ -54,7 +54,6 @@ export function raiseServerError(err) {
 export function deleteLocalStorageInformation(){
     localStorage.removeItem("authData")
     localStorage.removeItem("userDetails")
-    localStorage.removeItem("parkingSlotDetails")
 }
 
 

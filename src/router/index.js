@@ -7,6 +7,10 @@ import Landing from "@/components/Landing.vue";
 import about from "@/views/about.vue";
 import BookingList from "@/views/bookings/BookingList.vue";
 import RegisterForm from "@/views/auth/forms/RegisterForm.vue";
+import LoginView from "@/views/auth/LoginView.vue";
+import SlotList from "@/views/slots/SlotList.vue";
+import PaymentList from "@/views/payments/PaymentList.vue";
+import MakePayment from "@/views/payments/MakePayment.vue";
 
 const routes = [
   {
@@ -39,6 +43,15 @@ const routes = [
     },
   },
   {
+    name:'login',
+    path: '/login',
+    component: LoginView,
+    meta: {
+      slug: 'Login',
+      requiresAuth: false,
+    },
+  },
+  {
     name:'dashboard',
     path: '/dashboard',
     component: TheDashboardView,
@@ -57,18 +70,18 @@ const routes = [
         children: [
           {
             name:'user-edit',
-            path: ':id',
+            path: 'users/:id',
             component: RegisterForm,
             meta: {
               slug: 'Update Customer',
             },
           },
           {
-            name:'customer-create',
-            path: 'customer-create',
-            component: CreateEditCustomer,
+            name:'user-create',
+            path: 'user-create',
+            component: RegisterForm,
             meta: {
-              slug: 'Register Customer',
+              slug: 'Register User',
             },
           },
         ]
@@ -80,6 +93,32 @@ const routes = [
         meta: {
           slug: 'Bookings',
         },
+      },
+      {
+        name: 'parking-slots',
+        path: 'parking-slots',
+        component: SlotList,
+        meta: {
+          slug: 'Parking Slots',
+        },
+      },
+      {
+        name: 'payments',
+        path: 'payments',
+        component: PaymentList,
+        meta: {
+          slug: 'Parking Slots',
+        },
+        children: [
+          {
+            name: 'make-payment',
+            path: 'make-payment',
+            component: MakePayment,
+            meta: {
+              slug: 'Parking Slots',
+            },
+          }
+        ]
       }
     ]
   }

@@ -1,181 +1,115 @@
   <template>
-    <el-form
-      ref="ruleForm"
-      :model="form"
-      :rules="rules"
-      class="flex flex-col gap-4 w-full h-fit"
-      label-position="top"
-    >
+    <base-dialog>
+      <template #content>
+        <el-form
+            ref="ruleForm"
+            :model="form"
+            :rules="rules"
+            class="flex flex-col gap-4 w-full h-fit"
+            label-position="top"
+        >
 
-      <div class="flex gap-2 items-center">
-        <h1 class="font-bold text-2xl text-blue-500">{{config.appName}}</h1>
-      </div>
+          <div class="flex gap-2 items-center">
+            <h1 class="font-bold text-2xl text-blue-500">{{config.appName}}</h1>
+          </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-2 items-center">
-        <el-form-item label="First Name" prop="first_name">
-          <el-input
-              v-model="form.first_name"
-              :prefix-icon="User"
-              placeholder="first name"
-              size="large"
-              type="text"
-          />
-        </el-form-item>
-        <el-form-item label="Last Name" prop="last_name">
-          <el-input
-              v-model="form.last_name"
-              :prefix-icon="User"
-              placeholder="last name"
-              size="large"
-              type="text"
-          />
-        </el-form-item>
-        <el-form-item label="Email" prop="email">
-          <el-input
-              v-model="form.email"
-              :prefix-icon="FolderOpened"
-              placeholder="email"
-              size="large"
-              type="email"
-          />
-        </el-form-item>
-        <el-form-item v-if="route.name !== 'edit-user'" label="Password" prop="password">
-          <el-input
-              v-model="form.password"
-              :prefix-icon="Lock"
-              placeholder="password"
-              show-password
-              size="large"
-              type="password"
-          />
-        </el-form-item>
-        <el-form-item v-if="route.name !== 'edit-user'" label="Password Confirmation" prop="password_confirmation"
-            :rules="[
-              {
-                required: true,
-                trigger: 'blur',
-                message: 'Please enter password',
-              },
-              {
-                validator: validatePassword
-              }
-          ]"
-            >
-          <el-input
-              v-model="form.password_confirmation"
-              :prefix-icon="Lock"
-              placeholder="password"
-              show-password
-              size="large"
-              type="password"
-          />
-        </el-form-item>
-        <el-form-item label="User Type" prop="user_type" class="w-full">
-          <el-select
-              clearable
-              v-model="form.user_type"
-              placeholder="Select"
-              size="large"
-          >
-            <el-option
-                v-for="item in user_types"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-            />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="Phone Number" prop="phone_local_number" class="w-full"
-                      :rules="[
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-2 items-center">
+            <el-form-item label="First Name" prop="user_first_name">
+              <el-input
+                  v-model="form.user_first_name"
+                  :prefix-icon="User"
+                  placeholder="first name"
+                  size="large"
+                  type="text"
+              />
+            </el-form-item>
+            <el-form-item label="Last Name" prop="user_last_name">
+              <el-input
+                  v-model="form.user_last_name"
+                  :prefix-icon="User"
+                  placeholder="last name"
+                  size="large"
+                  type="text"
+              />
+            </el-form-item>
+            <el-form-item label="Email" prop="email">
+              <el-input
+                  v-model="form.email"
+                  :prefix-icon="FolderOpened"
+                  placeholder="email"
+                  size="large"
+                  type="email"
+              />
+            </el-form-item>
+            <el-form-item label="Role" prop="user_role">
+              <el-input
+                  v-model="form.user_role"
+                  :prefix-icon="FolderOpened"
+                  placeholder="user_role"
+                  size="large"
+              />
+            </el-form-item>
+            <el-form-item v-if="route.name !== 'user-edit'" label="Password" prop="password">
+              <el-input
+                  v-model="form.password"
+                  :prefix-icon="Lock"
+                  placeholder="password"
+                  show-password
+                  size="large"
+                  type="password"
+              />
+            </el-form-item>
+            <el-form-item label="Phone Number" prop="user_phone_number" class="w-full"
+                          :rules="[
               {
                 required: true,
                 trigger: 'blur',
                 message: 'Please enter a valid phone number',
-              },
-              {
-                validator: validatePhoneNumber
               }
           ]"
-        >
-          <el-input
-              v-model="form.phone_local_number"
-              style="max-width: 600px"
-              placeholder="Please input phone number"
-              class="input-with-select"
-              type="number"
-          >
-            <template #prepend>
-              <el-select v-model="form.phone_country_code"
-                         placeholder="Country Code" style="width: 60px">
-                <el-option label="+254" value="+254" />
-                <el-option label="+255" value="+255" />
-              </el-select>
-            </template>
-          </el-input>
-        </el-form-item>
-        <el-form-item label="Firm" prop="firm_id" class="w-full">
-          <el-select
-              v-model="form.firm_id"
-              clearable
-              @focus="fetchStores"
-              @change="clearBranch"
-              :loading="storeLoading"
-              placeholder="Firm To Which a user belongs"
-              size="large"
-          >
-            <template #loading>
-              <BaseLoader/>
-            </template>
-            <el-option
-                v-for="item in registeredStores"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-            />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="Branch **Optional" prop="branch" class="w-full" v-if="form.firm_id">
-          <el-select
-              v-model="form.branch_id"
-              clearable
-              @focus="fetchBranches"
-              :loading="branchLoading"
-              placeholder="Branch To Which a user belongs"
-              size="large"
-          >
-            <template #loading>
-              <BaseLoader/>
-            </template>
-            <el-option
-                v-for="item in registeredBranches"
-                :key="item.id"
-                :label="item.name"
-                :value="item.id"
-            />
-          </el-select>
-        </el-form-item>
-      </div>
+            >
+              <el-input
+                  v-model="form.user_phone_number"
+                  style="max-width: 600px"
+                  placeholder="Please input phone number"
+                  class="input-with-select"
+                  type="number"
+              >
+                <template #prepend>
+                  <el-select v-model="form.user_country_code"
+                             placeholder="Country Code" style="width: 60px">
+                    <el-option label="+254" value="+254" />
+                    <el-option label="+255" value="+255" />
+                  </el-select>
+                </template>
+              </el-input>
+            </el-form-item>
+          </div>
 
 
-      <div class="flex w-full ">
-        <el-button
-          :loading="submitLoading"
-          class="w-fit "
-          size="large"
-          style="border-radius: 4px"
-          type="primary"
-          html-type="submit"
-          @click="submitForm(ruleForm)"
-        >
-          Register
-        </el-button>
-      </div>
-      <div class="text-sm hidden">
-        <span class="text-gray-400"> Already have an Account ? </span>
-        <router-link :to="{name:'login'}" class="text-blue-400 hover:text-blue-500 hover:font-bold">
-          Sign In </router-link>
-      </div>
-    </el-form>
+          <div class="flex w-full ">
+            <el-button
+                :loading="submitLoading"
+                class="w-fit "
+                size="large"
+                style="border-radius: 4px"
+                type="primary"
+                html-type="submit"
+                @click="submitForm(ruleForm)"
+            >
+              Submit
+            </el-button>
+          </div>
+          <div class="text-sm hidden">
+            <span class="text-gray-400"> Already have an Account ? </span>
+            <router-link :to="{name:'login'}" class="text-blue-400 hover:text-blue-500 hover:font-bold">
+              Sign In </router-link>
+          </div>
+        </el-form>
+      </template>
+
+    </base-dialog>
+
 </template>
 
 <script lang="ts" setup>
@@ -188,6 +122,8 @@ import {FolderOpened, Lock, User} from '@element-plus/icons-vue'
 // import BaseLoader from "@/components/base/BaseLoader.vue";
 import {useRoute} from "vue-router"
 import config from "@/utility/configs.json"
+import BaseDialog from "@/components/base/BaseDialog.vue";
+import {useStore} from "vuex";
 
 
 const route = useRoute()
@@ -229,20 +165,15 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   await formEl.validate((valid, fields) => {
     console.log(fields,'fields')
     if (valid) {
-      if (route.name == 'register-user') {
+      if (route.name == 'user-create') {
         pushDataToDatabase('postData','users', form)
       }
 
-      if (route.name == 'edit-user') {
-        // console.log(form.value.firm_id.value, 'form')
-        let payload = {...form, branch_id:form.value.branch_id}
-        console.log(form.value.branch_id, 'payload')
+      if (route.name == 'user-edit') {
+        let payload = {...form.value}
 
-
-        // pushDataToDatabase('putData','users', payload, route?.params?.id)
-        store.dispatch("putData", {url: 'users', data:payload, id:route?.params.id}).then((response) => {
+        store.dispatch("patchData", {url: 'users', data:payload, id:route?.params.id}).then((response) => {
               submitLoading.value = false
-
         })
       }
     } else {
@@ -346,24 +277,12 @@ const fetchBranches = ()=>{
       })
 }
 
-const fetchOnMount = ()=>{
-  if (route.name == 'edit-user') {
-    store.dispatch('fetchSingleItem', {url:`users`, id:route?.params?.id}).then((res)=>{
-      // fill firm Data
-      if (res.data?.firm_id) {
-        store.dispatch('fetchSingleItem', {url:`firms`, id: res?.data.firm_id}).then((resp)=>{
-          form.value.firm_id = {value: resp.data.id, label:resp.data?.name}
-        })
-      }
+const store = useStore()
 
-      // fill branch data
-      if (res.data?.branch_id) {
-        store.dispatch('fetchSingleItem', {url:`branches`, id: res?.data.branch_id}).then((resp)=>{
-          form.value.branch_id = {value: resp.data.id, label:resp.data?.name}
-        })
-      }
+const fetchOnMount = ()=>{
+  if (route.name == 'user-edit') {
+    store.dispatch('fetchSingleItem', {url:`users`, id:route?.params?.id}).then((res)=>{
       form.value = res?.data
-      console.log(res.data.user)
     })
   }
 }

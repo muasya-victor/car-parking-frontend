@@ -6,11 +6,11 @@ import {formatDate} from "@/utility/functions.js";
 import store from "@/store/index.js";
 
 const columns = ref([
-  {prop: "user_first_name", label: "First Name", minWidth: "200"},
-  {prop: "user_last_name", label: "Last Name", minWidth: "200"},
-  {prop: "email", label: "Email", minWidth: "200"},
-  {prop: "user_is_active", label: "Is Active", minWidth: "200"},
-  {prop: "user_id", label: "Actions", minWidth: "200", key: "actions"},
+  {prop: "parking_slot_price_per_hour", label: "Slot Per Hour", minWidth: "200"},
+  {prop: "parking_slot_available", label: "Slot Availability", minWidth: "200", key: "slot_availability"},
+  {prop: "parking_slot_floor_number", label: "Floor Number", minWidth: "200", key: "parking_slot_floor_number"},
+  {prop: "parking_slot_capacity", label: "Slot Capacity", minWidth: "200", key: "parking_slot_capacity"},
+  {prop: "actions", label: "Actions", minWidth: "200", key: "actions"},
 ]);
 
 const goTo = (name, id) => {
@@ -44,7 +44,6 @@ const downloadReport = () => {
 
   <h2 class="text-xl font-bold my-2">Users</h2>
 
-  <el-button @click="downloadReport" class="mb-2 mr-2">Download User Report</el-button>
   <router-link :to="{name:'user-create'}">
     <el-button type="primary" class="mb-2">
       <span class="flex items-center gap-2">
@@ -53,7 +52,7 @@ const downloadReport = () => {
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
         </svg>
         <span>
-          User
+          Slot
         </span>
       </span>
 
@@ -62,7 +61,7 @@ const downloadReport = () => {
 
   <BaseDataTable
       :columns="columns"
-      fetch-url="users"
+      fetch-url="parking-slots"
       title="User"
   >
     <template v-slot:bodyCell="slotProps">
@@ -85,20 +84,23 @@ const downloadReport = () => {
         </el-tag>
       </template>
 
-      <template v-if="slotProps.column.prop === 'user_last_name'">
+      <template v-if="slotProps.column.prop === 'parking_slot_floor_number'">
         {{ slotProps.text }}
       </template>
 
-      <template v-if="slotProps.column.prop === 'email'">
+      <template v-if="slotProps.column.prop === 'parking_slot_capacity'">
         {{ slotProps.text }}
       </template>
 
-      <template v-if="slotProps.column.prop === 'phone'">
+      <template v-if="slotProps.column.prop === 'parking_slot_price_per_hour'">
         {{ slotProps.text }}
       </template>
 
-      <template v-if="slotProps.column.prop === 'location'">
-        {{ slotProps.text }}
+      <template v-if="slotProps.column.prop === 'parking_slot_available'">
+        <el-tag type="success" class="capitalize" v-if="slotProps.text === true">
+          {{ slotProps.text }}
+        </el-tag>
+        <el-tag type="danger" class="capitalize" v-else>{{ slotProps.text }}</el-tag>
       </template>
 
       <template v-if="slotProps.column.key === 'actions'">
