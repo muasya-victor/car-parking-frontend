@@ -12,6 +12,14 @@ const branchUrl = 'branch-view'
 
 <template>
   <el-menu-item
+      index="landing">
+    <el-icon>
+      <home-filled/>
+    </el-icon>
+    <template #title>Home</template>
+  </el-menu-item>
+
+  <el-menu-item
       index="users">
     <el-icon>
       <user-filled/>
