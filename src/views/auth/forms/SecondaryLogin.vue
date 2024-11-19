@@ -126,7 +126,6 @@ const submitForm = async (formEl: FormInstance | undefined) => {
         Login
       </el-button>
     </div>
-    dlflfl
     <div class="text-sm">
       <span class="text-gray-400"> Don't have an Account ? </span>
       <router-link :to="{name:'register-user'}" class="text-blue-400 hover:text-blue-500 hover:font-bold"> Register </router-link>

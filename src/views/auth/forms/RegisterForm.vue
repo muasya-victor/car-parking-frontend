@@ -165,7 +165,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   await formEl.validate((valid, fields) => {
     console.log(fields,'fields')
     if (valid) {
-      if (route.name == 'user-create') {
+      if (route.name != 'user-edit') {
         pushDataToDatabase('postData','users', form)
       }
 
