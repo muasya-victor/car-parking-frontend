@@ -34,6 +34,14 @@ const routes = [
     },
   },
   {
+    name:'register-user',
+    path: '/register-user',
+    component: RegisterForm,
+    meta: {
+      slug: 'Register User',
+    },
+  },
+  {
     name:'about',
     path: '/about',
     component: about,

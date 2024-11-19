@@ -4,6 +4,8 @@ import {ref} from "vue";
 import router from "@/router/index.js";
 import {formatDate} from "@/utility/functions.js";
 
+const authData = JSON.parse(localStorage.getItem("authData"));
+
 const columns = ref([
   {prop: "user", label: "Driver's Email", minWidth: "200"},
   {prop: "booking_start_time", label: "Start Time", minWidth: "200"},
@@ -34,7 +36,7 @@ const formatDateColumn = (dateString) => {
     <template v-slot:bodyCell="slotProps">
       <template v-if="slotProps.column.prop === 'user'">
 
-        {{ slotProps.text?.email }}
+        {{ authData?.user?.email }}
       </template>
       <template v-if="slotProps.column.prop === 'booking_start_time'">
 

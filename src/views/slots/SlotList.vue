@@ -37,14 +37,17 @@ const downloadReport = () => {
     console.error("Error downloading report:", error);
   }
 };
+
+const authData = JSON.parse(localStorage.getItem("authData"));
+
 </script>
 
 <template>
   <router-view/>
 
-  <h2 class="text-xl font-bold my-2">Users</h2>
+  <h2 class="text-xl font-bold my-2">Slots </h2>
 
-  <router-link :to="{name:'user-create'}">
+  <router-link v-if="authData?.user?.user_role !== 'driver'" :to="{name:'user-create'}">
     <el-button type="primary" class="mb-2">
       <span class="flex items-center gap-2">
          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

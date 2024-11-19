@@ -13,6 +13,9 @@ const columns = ref([
   {prop: "user_id", label: "Actions", minWidth: "200", key: "actions"},
 ]);
 
+const authData = JSON.parse(localStorage.getItem("authData"));
+
+
 const goTo = (name, id) => {
   router.push({name: name, params: {id: id}});
 };
@@ -44,8 +47,8 @@ const downloadReport = () => {
 
   <h2 class="text-xl font-bold my-2">Users</h2>
 
-  <el-button @click="downloadReport" class="mb-2 mr-2">Download User Report</el-button>
-  <router-link :to="{name:'user-create'}">
+  <el-button v-if="authData?.user?.user_role !== 'driver'" @click="downloadReport" class="mb-2 mr-2">Download User Report</el-button>
+  <router-link v-if="authData?.user?.user_role !== 'driver'" :to="{name:'user-create'}">
     <el-button type="primary" class="mb-2">
       <span class="flex items-center gap-2">
          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -111,7 +114,7 @@ const downloadReport = () => {
           </el-icon>
         </ElButton>
 
-        <ElButton type="danger" link @click="deleteUser(slotProps.text)" size="default" plain>
+        <ElButton v-if="authData?.user?.user_role !== 'driver'" type="danger" link @click="deleteUser(slotProps.text)" size="default" plain>
           <span class="w-2"></span>
           <el-icon>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
