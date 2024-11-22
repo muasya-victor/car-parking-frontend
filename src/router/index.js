@@ -11,6 +11,7 @@ import LoginView from "@/views/auth/LoginView.vue";
 import SlotList from "@/views/slots/SlotList.vue";
 import PaymentList from "@/views/payments/PaymentList.vue";
 import MakePayment from "@/views/payments/MakePayment.vue";
+import NotificationList from "@/views/notifications/NotificationList.vue";
 
 const routes = [
   {
@@ -100,6 +101,14 @@ const routes = [
         component: BookingList,
         meta: {
           slug: 'Bookings',
+        },
+      },
+      {
+        name: 'notifications',
+        path: 'notifications',
+        component: NotificationList,
+        meta: {
+          slug: 'Notifications',
         },
       },
       {

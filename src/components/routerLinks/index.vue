@@ -1,6 +1,15 @@
 <script setup>
 
-import {Cloudy, DataAnalysis, HomeFilled, Notebook, Setting, UserFilled, Wallet} from "@element-plus/icons-vue";
+import {
+  BellFilled,
+  Cloudy,
+  DataAnalysis,
+  HomeFilled,
+  Notebook,
+  Setting,
+  UserFilled,
+  Wallet
+} from "@element-plus/icons-vue";
 
 const userType = JSON.parse(localStorage.getItem("authData"))?.user?.user_type;
 const user = JSON.parse(localStorage.getItem("authData"))?.user;
@@ -33,6 +42,14 @@ const branchUrl = 'branch-view'
       <notebook/>
     </el-icon>
     <template #title>Bookings</template>
+  </el-menu-item>
+
+  <el-menu-item
+      index="notifications">
+    <el-icon>
+      <bell-filled/>
+    </el-icon>
+    <template #title>Notifications</template>
   </el-menu-item>
 
   <el-menu-item
