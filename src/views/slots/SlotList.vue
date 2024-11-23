@@ -106,7 +106,7 @@ const authData = JSON.parse(localStorage.getItem("authData"));
         <el-tag type="danger" class="capitalize" v-else>{{ slotProps.text }}</el-tag>
       </template>
 
-      <template v-if="slotProps.column.key === 'actions'">
+      <template v-if="slotProps.column.key === 'actions' && authData?.user?.user_role === 'admin'">
         <ElButton type="primary" link @click="goTo('slot-edit', slotProps.text)" size="default" plain>
           <span class="w-2"></span>
           <el-icon>
