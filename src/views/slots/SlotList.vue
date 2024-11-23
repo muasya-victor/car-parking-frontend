@@ -10,15 +10,15 @@ const columns = ref([
   {prop: "parking_slot_available", label: "Slot Availability", minWidth: "200", key: "slot_availability"},
   {prop: "parking_slot_floor_number", label: "Floor Number", minWidth: "200", key: "parking_slot_floor_number"},
   {prop: "parking_slot_capacity", label: "Slot Capacity", minWidth: "200", key: "parking_slot_capacity"},
-  {prop: "actions", label: "Actions", minWidth: "200", key: "actions"},
+  {prop: "parking_slot_id", label: "Actions", minWidth: "200", key: "actions"},
 ]);
 
 const goTo = (name, id) => {
-  router.push({name: name, params: {id: id}});
+  router.push({name: name, params: {slotId: id}});
 };
 
 const deleteUser = (id) => {
-  store.dispatch('deleteData', {id: id, url:'users'});
+  store.dispatch('deleteData', {id: id, url:'parking-slots'});
 };
 
 const formatDateColumn = (dateString) => {
@@ -47,7 +47,7 @@ const authData = JSON.parse(localStorage.getItem("authData"));
 
   <h2 class="text-xl font-bold my-2">Slots </h2>
 
-  <router-link v-if="authData?.user?.user_role !== 'driver'" :to="{name:'user-create'}">
+  <router-link v-if="authData?.user?.user_role === 'admin'" :to="{name:'slot-create'}">
     <el-button type="primary" class="mb-2">
       <span class="flex items-center gap-2">
          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -107,7 +107,7 @@ const authData = JSON.parse(localStorage.getItem("authData"));
       </template>
 
       <template v-if="slotProps.column.key === 'actions'">
-        <ElButton type="primary" link @click="goTo('user-edit', slotProps.text)" size="default" plain>
+        <ElButton type="primary" link @click="goTo('slot-edit', slotProps.text)" size="default" plain>
           <span class="w-2"></span>
           <el-icon>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">

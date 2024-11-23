@@ -22,7 +22,7 @@
             <el-select disabled size="large" placeholder="Select Location"
                        :loading="parkingSlotLoader"
                        @focus="getParkingSlots"
-                       v-model="parkingSlotData.parking_slot_id" style="width: 100%" class="w-full">
+                       v-model="parkingSlotData.booking_parking_slot" style="width: 100%" class="w-full">
               <el-option v-for="slot in parkingSlots"
                          :key="slot.parking_slot_id"
                          :value="slot.parking_slot_id">
@@ -32,6 +32,7 @@
             </el-select>
           </el-form-item>
         </div>
+        {{parkingSlotData}}
         <div class="flex w-full ">
           <el-button
               :loading="submitLoading"
@@ -127,8 +128,9 @@ const submitForm = async (formEl: FormInstance | undefined) => {
 
   const payload = {
     payment_user: authData?.user?.user_id,
-    payment_parking_slot: parkingSlotData?.parking_slot_id,
-    payment_amount: 400
+    payment_parking_slot: parkingSlotData?.booking_parking_slot,
+    payment_amount: parkingSlotData.booking_total_cost,
+    payment_booking: parkingSlotData.booking_id
   };
 
   await formEl.validate((valid, fields) => {

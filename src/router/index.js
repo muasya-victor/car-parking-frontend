@@ -12,6 +12,7 @@ import SlotList from "@/views/slots/SlotList.vue";
 import PaymentList from "@/views/payments/PaymentList.vue";
 import MakePayment from "@/views/payments/MakePayment.vue";
 import NotificationList from "@/views/notifications/NotificationList.vue";
+import CreateEditSlot from "@/views/slots/CreateEditSlot.vue";
 
 const routes = [
   {
@@ -118,6 +119,24 @@ const routes = [
         meta: {
           slug: 'Parking Slots',
         },
+        children: [
+          {
+            name:'slot-create',
+            path: 'slot-create',
+            component: CreateEditSlot,
+            meta: {
+              slug: 'Register Slot',
+            },
+          },
+          {
+            name:'slot-edit',
+            path: 'slot-edit/:slotId',
+            component: CreateEditSlot,
+            meta: {
+              slug: 'Edit Slot',
+            },
+          },
+        ]
       },
       {
         name: 'payments',

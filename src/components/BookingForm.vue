@@ -68,7 +68,6 @@ const getParkingSlots = ()=>{
 
 const setToLocalStorage = () => {
   if (form?.value?.entryDate !== '' && form?.value?.parking_slot_id !== '') {
-    localStorage.setItem("parkingSlotData", JSON.stringify(form.value));
 
     const authData = JSON.parse(localStorage.getItem("authData"));
 
@@ -83,13 +82,13 @@ const setToLocalStorage = () => {
               data: {
                 booking_user: userAuthData?.user_id,
                 booking_end_time: form.value?.entryDate,
+                booking_parking_slot: form.value?.parking_slot_id,
               }
             }
         ).then((resp)=>{
           showLogin.value = false
-          // localStorage.setItem("parkingSlotData", JSON.stringify(form.value));
+          localStorage.setItem("parkingSlotData", JSON.stringify(resp?.data));
           form.value.booking_total_cost = resp?.data?.booking_total_cost;
-          localStorage.setItem("parkingSlotData", JSON.stringify(form.value));
 
           router.push({name: 'make-payment'});
         })
