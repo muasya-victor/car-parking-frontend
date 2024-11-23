@@ -16,6 +16,7 @@ const user = JSON.parse(localStorage.getItem("authData"))?.user;
 // const branch = JSON.parse(localStorage.getItem("authData"))?.user?.branch;
 const branch = user?.branch;
 const branchUrl = 'branch-view'
+const authData = JSON.parse(localStorage.getItem("authData"));
 
 </script>
 
@@ -53,6 +54,7 @@ const branchUrl = 'branch-view'
   </el-menu-item>
 
   <el-menu-item
+      v-if="authData?.user?.user_role === 'admin'"
       index="parking-slots">
     <el-icon>
       <cloudy/>
