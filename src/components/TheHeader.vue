@@ -1,15 +1,15 @@
 <template>
-    <header class="bg-blue-500 py-4 shadow-xl">
+    <header class="w-full bg-transparent py-4">
       <div class="container mx-auto px-4">
         <nav class="flex items-center justify-between capitalize">
 
           <!-- Standalone SmartPark Brand on the far left -->
-          <router-link to="/" class="flex items-center font-mono space-x-2 text-white font-bold text-2xl">
-            <span>Smart Park</span>
+          <router-link to="/" class="flex items-center space-x-2 text-white font-bold text-2xl">
+            <span class="font-extrabold">SMARTPARK</span>
           </router-link>
 
           <!-- Navigation Menu (Home, About Us, Services, Login) on the right -->
-          <ul class="flex items-center space-x-6 text-white capitalize">
+          <ul class="flex items-center space-x-6 text-white capitalize font-bold">
             <li>
               <router-link to="/" class="hover:text-blue-200 transition-colors">HOME</router-link>
             </li>

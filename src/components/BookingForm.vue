@@ -1,8 +1,8 @@
 <!-- components/BookingForm.vue -->
 <template>
-  <div class="bg-blue-400 p-6 text-white w-full">
-    <h2 class="text-center text-xl font-semibold mb-4">BOOK CAR PARKING SPACE</h2>
-    <div class="mb-4 w-full">
+  <div class=" rounded p-6 text-white w-full">
+    <h2 class="text-center text-xl font-semibold mb-4 bg-blue-700 p-4 rounded-md">BOOK CAR PARKING SPACE</h2>
+    <div class="mb-4 w-full bg-blue-700 p-4 rounded-md">
       <label for="location" class="block mb-1">Parking Slot</label>
       <el-select size="large" placeholder="Select Location"
                  :loading="parkingSlotLoader"
@@ -17,7 +17,7 @@
       </el-select>
     </div>
 
-    <div class="mb-4">
+    <div class="mb-4 bg-blue-700 p-4 rounded-md">
       <el-date-picker
           size="large"
           style="width: 100%" class="w-full"
@@ -33,6 +33,7 @@
     <el-button size="large"
                @click="setToLocalStorage"
                type="primary"
+               style="background-color: rgba(29, 78, 216, var(--tw-bg-opacity)); --tw-bg-opacity: 1;"
                class="w-full">Book Now</el-button>
   </div>
   <el-dialog  v-model="showLogin">
