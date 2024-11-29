@@ -144,7 +144,7 @@ export default createStore({
 
               // Set the download attribute with a filename for the PDF
               link.href = URL.createObjectURL(blob);
-              link.download = 'user_report.pdf';
+              link.download = 'report.pdf';
 
               // Append the link to the body
               document.body.appendChild(link);

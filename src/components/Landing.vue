@@ -26,6 +26,32 @@ import TheHeader from "@/components/TheHeader.vue";
       </div>
     </div>
 
+    <section class="about_section p-12 bg-gray-50 rounded-md">
+      <div class="container mx-auto">
+        <div class="flex flex-wrap items-center p-4">
+          <!-- Text Section -->
+          <div class="w-full md:w-1/2 ">
+            <h4 class="text-lg font-bold mb-4">Join us today!</h4>
+            <div class="detail-box">
+              <p class="text-black mb-6">
+                Welcome to <b>SmartPark</b>, an innovative parking solution designed to reduce congestion in crowded urban areas by identifying available parking slots in real time. Our system provides a seamless, user-friendly experience that allows drivers to quickly locate, book, and pay for parking spaces. With SmartPark, we aim to improve traffic flow and save time by eliminating the hassle of searching for parking. 
+                Our mission is to make city parking smarter, more efficient, and accessible to all drivers.
+              </p>
+              <a href="/about" class="text-white bg-green-700 p-4 rounded-md hover:bg-green-800 font-medium">
+                Learn more
+              </a>
+            </div>
+          </div>
+
+          <!-- Image Section -->
+          <div class="w-full md:w-1/2 bg-[url('/bg.jpg')] h-[300px] bg-cover bg-norepeat bg-left-top ">
+      
+          </div>
+        </div>
+      </div>
+    </section>
+
+
     <!-- FAQ Section -->
     <section class="faq_section py-16 w-full">
       <div class="container mx-auto px-4 text-center text-white">

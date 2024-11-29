@@ -1,8 +1,10 @@
 <template>
   <div class="relative">
-    <TheHeader class="w-full sticky top-0 left-0"/>
+    <div class="w-full bg-blue-700 sticky top-0 left-0">
+      <TheHeader />
+    </div>
     <!-- About Section -->
-    <section class="about_section py-16 bg-gray-50">
+    <section class="about_section py-16">
       <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <!-- Left Column -->

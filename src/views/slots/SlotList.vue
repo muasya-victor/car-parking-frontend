@@ -28,7 +28,7 @@ const formatDateColumn = (dateString) => {
 const downloadReport = () => {
   try {
     store.dispatch('downloadFirmData', {
-      url: 'report',
+      url: 'slot/report',
     })
         .then((response) => {
 
@@ -46,6 +46,9 @@ const authData = JSON.parse(localStorage.getItem("authData"));
   <router-view/>
 
   <h2 class="text-xl font-bold my-2">Slots </h2>
+
+  <el-button v-if="authData?.user?.user_role !== 'driver'" @click="downloadReport" class="mb-2 mr-2">Download Slots Report</el-button>
+
 
   <router-link v-if="authData?.user?.user_role === 'admin'" :to="{name:'slot-create'}">
     <el-button type="primary" class="mb-2">
