@@ -32,7 +32,6 @@
             </el-select>
           </el-form-item>
         </div>
-        {{parkingSlotData}}
         <div class="flex w-full ">
           <el-button
               :loading="submitLoading"
