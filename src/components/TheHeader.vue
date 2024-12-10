@@ -1,5 +1,5 @@
 <template>
-    <header class="w-full bg-transparent py-4">
+    <header class="w-full bg-black py-4 ">
       <div class="container mx-auto px-4">
         <nav class="flex items-center justify-between capitalize">
 

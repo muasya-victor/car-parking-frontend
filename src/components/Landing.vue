@@ -5,11 +5,11 @@ import TheHeader from "@/components/TheHeader.vue";
 </script>
 
 <template>
-  <div class="w-screen min-h-screen bg-[url('/bg.jpg')] bg-cover bg-norepeat bg-left-top flex flex-col gap-4 justify-center items-center">
-  <TheHeader/>
+  <div class="w-screen min-h-screen  flex flex-col justify-center items-center">
+  <TheHeader class=""/>
 
-    <div class="p-6 flex gap-2 items-start justify-between w-full container ">
-      <div class="md:w-5/12">
+    <div class="px-6 py-16 flex gap-2 items-start justify-between w-full bg-[url('/bg.jpg')] bg-cover bg-norepeat bg-left-top min-h-[60VH]">
+      <div class="md:w-5/12 container mx-auto">
         <BookingForm/>
       </div>
       
@@ -26,30 +26,6 @@ import TheHeader from "@/components/TheHeader.vue";
       </div>
     </div>
 
-    <section class="about_section p-12 bg-gray-50 rounded-md">
-      <div class="container mx-auto">
-        <div class="flex flex-wrap items-center p-4">
-          <!-- Text Section -->
-          <div class="w-full md:w-1/2 ">
-            <h4 class="text-lg font-bold mb-4">Join us today!</h4>
-            <div class="detail-box">
-              <p class="text-black mb-6">
-                Welcome to <b>SmartPark</b>, an innovative parking solution designed to reduce congestion in crowded urban areas by identifying available parking slots in real time. Our system provides a seamless, user-friendly experience that allows drivers to quickly locate, book, and pay for parking spaces. With SmartPark, we aim to improve traffic flow and save time by eliminating the hassle of searching for parking. 
-                Our mission is to make city parking smarter, more efficient, and accessible to all drivers.
-              </p>
-              <a href="/about" class="text-white bg-green-700 p-4 rounded-md hover:bg-green-800 font-medium">
-                Learn more
-              </a>
-            </div>
-          </div>
-
-          <!-- Image Section -->
-          <div class="w-full md:w-1/2 bg-[url('/bg.jpg')] h-[300px] bg-cover bg-norepeat bg-left-top ">
-      
-          </div>
-        </div>
-      </div>
-    </section>
 
 
     <!-- FAQ Section -->
@@ -110,6 +86,31 @@ import TheHeader from "@/components/TheHeader.vue";
       </div>
     </section>
 
+    <section class="about_section p-12 bg-gray-50 rounded-md">
+      <div class=" mx-auto">
+        <div class="flex gap-4 justify-between flex-wrap items-center p-4">
+          <!-- Text Section -->
+          <div class="w-full md:w-1/3 ">
+            <h4 class="text-lg font-bold mb-4">Join us today!</h4>
+            <div class="detail-box">
+              <p class="text-black mb-6">
+                Welcome to <b>SmartPark</b>, an innovative parking solution designed to reduce congestion in crowded urban areas by identifying available parking slots in real time. Our system provides a seamless, user-friendly experience that allows drivers to quickly locate, book, and pay for parking spaces. With SmartPark, we aim to improve traffic flow and save time by eliminating the hassle of searching for parking.
+                Our mission is to make city parking smarter, more efficient, and accessible to all drivers.
+              </p>
+              <a href="/about" class="text-white bg-green-700 p-4 rounded-md hover:bg-green-800 font-medium">
+                Learn more
+              </a>
+            </div>
+          </div>
+
+          <!-- Image Section -->
+          <div class="w-full md:w-1/2 bg-[url('/bg.jpg')] h-[300px] bg-cover bg-norepeat bg-left-top ">
+
+          </div>
+        </div>
+      </div>
+    </section>
+
 
     <the-footer/>
   </div>
@@ -119,7 +120,7 @@ import TheHeader from "@/components/TheHeader.vue";
 
 <style scoped>
 .faq-item {
-  background-color: #f3f4f6;
+  background-color: #577ace;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 12px;
