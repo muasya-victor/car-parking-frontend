@@ -9,8 +9,10 @@
                  @focus="getParkingSlots"
                  v-model="form.parking_slot_id" style="width: 100%" class="w-full">
         <el-option v-for="slot in parkingSlots"
-                   :key="slot.parking_slot_id"
-                   :value="slot.parking_slot_id">
+                   :key="slot"
+                   :value="slot?.parking_slot_id"
+                   :label="slot?.parking_slot_location"
+        >
           Floor No
           {{slot.parking_slot_floor_number}} :
           {{slot.parking_slot_location}}
