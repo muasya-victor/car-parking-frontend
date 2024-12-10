@@ -26,7 +26,7 @@
           type="datetime"
           format="YYYY-MM-DD HH:mm:ss"
           date-format="YYYY/MM/DD ddd"
-          value-format="YYYY-MM-DD"
+          value-format="YYYY-MM-DD HH:mm:ss"
       />
     </div>
 
