@@ -52,7 +52,7 @@ import TheHeader from "@/components/TheHeader.vue";
     </section>
 
     <!-- FAQ Section -->
-    <section class="faq_section py-16 w-full">
+    <section class="faq_section py-16 w-full bg-[url('/multi-storey-car-park.jpg')] bg-cover bg-norepeat bg-left-top">
       <div class="container mx-auto px-4 text-center text-white">
         <h2 class="text-4xl font-semibold mb-8">FAQ</h2>
 
