@@ -33,7 +33,7 @@ const logout = ()=>{
   deleteLocalStorageInformation()
   window.location.reload()
 }
-const authData = JSON.parse(localStorage.getItem("authData"));
+const authData = JSON.parse(localStorage.getItem("authData")) || {user:[]};
 
 const route = useRoute();
 const breadcrumbs = ref([]);
@@ -105,9 +105,11 @@ watch(route, updateBreadcrumbs, { immediate: true });
                 <!--              <span>{{authData?.user?.first_name[0]}}</span> <span>{{authData?.user?.last_name[0]}}</span>-->
                 <!--            </div>-->
                 <div class=" font-bold primary-bg rounded-full h-[3rem] w-[3rem] p-2 flex items-center justify-center cursor-pointer text-[#fc7c04]">
-                  <div class="flex p-0 items-center w-full h-fit mt-2  text-center  text-white justify-center ">
-                    {{authData?.user?.user_first_name[0]}} {{authData?.user?.user_last_name[0]}}
+                  <div v-if="authData" class="flex p-0 items-center w-full h-fit mt-2 text-center text-white justify-center">
+                    {{authData?.user?.user_first_name ? authData?.user?.user_first_name[0] : ''}}
+                    {{authData?.user?.user_last_name ? authData?.user?.user_last_name[0] : ''}}
                   </div>
+
 
                 </div>
               </template>

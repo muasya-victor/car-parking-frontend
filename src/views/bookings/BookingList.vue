@@ -3,6 +3,7 @@ import BaseDataTable from "@/components/base/BaseDataTable.vue";
 import {ref} from "vue";
 import router from "@/router/index.js";
 import {formatDate} from "@/utility/functions.js";
+import store from "@/store/index.js";
 
 const authData = JSON.parse(localStorage.getItem("authData"));
 
@@ -21,12 +22,28 @@ const goTo = (name, id) => {
 const formatDateColumn = (dateString) => {
   return formatDate(dateString); // Assuming formatDate handles date formatting
 };
+
+const downloadReport = () => {
+  try {
+    store.dispatch('downloadFirmData', {
+      url: 'booking/report',
+    })
+        .then((response) => {
+
+        });
+  } catch (error) {
+    console.error("Error downloading report:", error);
+  }
+};
 </script>
 
 <template>
   <router-view/>
 
   <h2 class="text-xl font-bold my-2">Bookings</h2>
+
+  <el-button v-if="authData?.user?.user_role !== 'driver'" @click="downloadReport" class="mb-2 mr-2">Download Booking Report</el-button>
+
 
   <BaseDataTable
       :columns="columns"
