@@ -11,6 +11,7 @@
         <el-option v-for="slot in parkingSlots"
                    :key="slot.parking_slot_id"
                    :value="slot.parking_slot_id">
+          Floor No
           {{slot.parking_slot_floor_number}} :
           {{slot.parking_slot_location}}
         </el-option>
