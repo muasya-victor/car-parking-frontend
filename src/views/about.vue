@@ -139,7 +139,7 @@ export default {
 
 <style scoped>
 .faq-item {
-  background-color: #f3f4f6;
+  background-color: #7aa3f6;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 12px;
