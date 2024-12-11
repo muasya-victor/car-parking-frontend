@@ -117,10 +117,10 @@ import { reactive, ref,onMounted , inject} from "vue";
 // import { LockClosedIcon, UserIcon } from "@heroicons/vue/24/solid";
 import { FormInstance, FormRules } from "element-plus";
 // import store from "@/store";
-// import router from "@/router";
+import router from "@/router";
 import {FolderOpened, Lock, User} from '@element-plus/icons-vue'
 // import BaseLoader from "@/components/base/BaseLoader.vue";
-import {useRoute} from "vue-router"
+import {useRoute, useRouter} from "vue-router"
 import config from "@/utility/configs.json"
 import BaseDialog from "@/components/base/BaseDialog.vue";
 import {useStore} from "vuex";
@@ -151,6 +151,31 @@ const rules = reactive<FormRules>({
     trigger: "blur",
     message: "Please enter password",
   },
+  user_email: {
+    required: true,
+    trigger: "blur",
+    message: "Please enter email",
+  },
+  email: {
+    required: true,
+    trigger: "blur",
+    message: "Please enter email",
+  },
+  user_role: {
+    required: true,
+    trigger: "blur",
+    message: "Please enter email",
+  },
+  user_first_name: {
+    required: true,
+    trigger: "blur",
+    message: "Please enter email",
+  },
+  user_last_name: {
+    required: true,
+    trigger: "blur",
+    message: "Please enter email",
+  },
 });
 
 const clearBranch = ()=>{
@@ -166,7 +191,11 @@ const submitForm = async (formEl: FormInstance | undefined) => {
     console.log(fields,'fields')
     if (valid) {
       if (route.name != 'user-edit') {
-        pushDataToDatabase('postData','users', form)
+        store.dispatch('postData', {url:'users', data: form.value })
+            .then(res => {
+              // const router = useRouter()
+              router.push({name:'login'})
+            })
       }
 
       if (route.name == 'user-edit') {
